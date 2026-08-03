@@ -25,6 +25,7 @@ params:
   ShowBreadCrumbs: true
   ShowShareButtons: true
   ShowPostNavLinks: true
+  comments: true
 
   homeInfoParams:
     Title: "你好 👋"
@@ -58,6 +59,20 @@ params:
     URL: "https://github.com/coo-moon/coo-moon.github.io/tree/main/content"
     Text: "📝 指正本文"  # 显示文字
     appendFilePath: true  # 自动追加文件路径
+
+  # Giscus 评论系统（基于 GitHub Discussions）
+  # 配置生成器：https://giscus.app
+  giscus:
+    repo: "coo-moon/coo-moon.github.io"
+    repoID: "R_kgDOTsNaLg"
+    category: "Announcements"
+    categoryID: "DIC_kwDOTsNaLs4DCkGN"
+    theme: "preferred_color_scheme"
+
+  # Umami 访问统计
+  # 注册：https://cloud.umami.is
+  umami:
+    websiteID: "f927a089-5b80-41be-8950-52d1d390dc7b"
 
 menu:
   main:

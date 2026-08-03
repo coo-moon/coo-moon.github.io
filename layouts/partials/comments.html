@@ -1,6 +1,6 @@
-{{- /* Giscus 评论系统 — 需要在 https://giscus.app 生成配置后替换 */ -}}
-{{- if .Site.Params.giscus -}}
-<div class="comments">
+{{- /* Giscus 评论系统 — 基于 GitHub Discussions */ -}}
+{{- if .Site.Params.giscus }}
+<section class="comments">
   <script src="https://giscus.app/client.js"
     data-repo="{{ .Site.Params.giscus.repo }}"
     data-repo-id="{{ .Site.Params.giscus.repoID }}"
@@ -13,8 +13,9 @@
     data-input-position="top"
     data-theme="{{ .Site.Params.giscus.theme | default `preferred_color_scheme` }}"
     data-lang="zh-CN"
+    data-loading="lazy"
     crossorigin="anonymous"
     async>
   </script>
-</div>
+</section>
 {{- end -}}

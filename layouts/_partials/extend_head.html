@@ -1,0 +1,8 @@
+{{- /* Head custom content area start */ -}}
+{{- /* Umami Analytics */ -}}
+{{- with .Site.Params.umami }}
+{{- if .websiteID }}
+<script defer src="https://cloud.umami.is/script.js" data-website-id="{{ .websiteID }}"></script>
+{{- end }}
+{{- end }}
+{{- /* Head custom content area end */ -}}
