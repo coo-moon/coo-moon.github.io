@@ -39,6 +39,25 @@ params:
   socialIcons:
     - name: github
       url: "https://github.com/coo-moon"
+    - name: email
+      url: "mailto:comioon@qq.com"
+    - name: rss
+      url: "/index.xml"
+
+  # 文章封面图占位
+  cover:
+    linkFullImages: true
+    responsiveImages: true
+
+  # SEO
+  env: production
+  keywords: [AI, 大模型, Agent, Hugo, 博客, 技术笔记]
+
+  # 编辑链接（可选）
+  editPost:
+    URL: "https://github.com/coo-moon/coo-moon.github.io/tree/main/content"
+    Text: "📝 指正本文"  # 显示文字
+    appendFilePath: true  # 自动追加文件路径
 
 menu:
   main:
@@ -68,3 +87,12 @@ outputs:
     - HTML
     - RSS
     - JSON
+
+# 站点地图
+sitemap:
+  changefreq: weekly
+  priority: 0.5
+
+# 永久链接格式
+permalinks:
+  posts: /posts/:slug/

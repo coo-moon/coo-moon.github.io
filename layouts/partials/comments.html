@@ -1,0 +1,20 @@
+{{- /* Giscus 评论系统 — 需要在 https://giscus.app 生成配置后替换 */ -}}
+{{- if .Site.Params.giscus -}}
+<div class="comments">
+  <script src="https://giscus.app/client.js"
+    data-repo="{{ .Site.Params.giscus.repo }}"
+    data-repo-id="{{ .Site.Params.giscus.repoID }}"
+    data-category="{{ .Site.Params.giscus.category }}"
+    data-category-id="{{ .Site.Params.giscus.categoryID }}"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="{{ .Site.Params.giscus.theme | default `preferred_color_scheme` }}"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+  </script>
+</div>
+{{- end -}}
