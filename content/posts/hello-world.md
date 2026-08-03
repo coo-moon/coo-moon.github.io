@@ -4,6 +4,7 @@ date: 2026-08-03
 draft: false
 tags: ["Hugo", "博客", "GitHub Pages"]
 categories: ["技术实践"]
+slug: "hello-world"
 summary: "用 Hugo + GitHub Pages 搭建免费技术博客的完整过程。"
 ---
 

@@ -4,6 +4,7 @@ date: 2026-08-03
 draft: false
 tags: ["AI", "Agent", "Hermes", "自动化"]
 categories: ["AI 学习笔记"]
+slug: "hermes-agent-30-days"
 summary: "30 天深度使用 Hermes Agent 的实战分享：定时盯盘、邮件管理、博客搭建，一个 Agent 搞定日常自动化。"
 ---
 

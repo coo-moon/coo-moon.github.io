@@ -4,6 +4,7 @@ date: 2026-08-03
 draft: false
 tags: ["AI", "学习路线", "大模型", "Agent"]
 categories: ["AI 学习笔记"]
+slug: "ai-learning-roadmap"
 summary: "一份面向工程师的 AI 系统学习路线图，从基础概念到 Agent 开发实战，60 天可执行计划。"
 weight: 1
 ---
