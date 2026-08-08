@@ -57,7 +57,7 @@ body {
     font-family: "Share Tech Mono", "JetBrains Mono", Consolas, "PingFang SC", "Microsoft YaHei", "Noto Sans SC", monospace;
 }
 
-/* ---------- 背景：数字雨 canvas 层 ---------- */
+/* ---------- 背景：数字雨 iframe 层 ---------- */
 #matrix-rain {
     position: fixed;
     top: 0;
@@ -66,6 +66,10 @@ body {
     height: 100%;
     z-index: -2;
     pointer-events: none;
+    border: none;
+    opacity: 0.5;
+    transition: opacity 0.4s ease;
+    background: transparent;
 }
 
 /* 背景遮罩，保证可读性 */
@@ -78,6 +82,108 @@ body::before {
         radial-gradient(ellipse at 50% 0%, rgba(0, 40, 15, 0.35) 0%, rgba(0, 0, 0, 0) 60%),
         linear-gradient(rgba(0, 20, 8, 0.55), rgba(0, 8, 3, 0.75));
     pointer-events: none;
+}
+
+/* ---------- 首页打字机 ---------- */
+#matrix-typed {
+    display: block;
+    margin: 18px 0 4px;
+    padding: 14px 18px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: rgba(0, 20, 8, 0.6);
+    font-family: "Share Tech Mono", Consolas, monospace;
+    font-size: 1.05em;
+    color: var(--primary);
+    min-height: 2.2em;
+    line-height: 1.6;
+    letter-spacing: 0.03em;
+    box-shadow: inset 0 0 18px rgba(0, 255, 65, 0.06), var(--neon-glow);
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+.typed-cursor {
+    color: var(--primary);
+    animation: matrix-blink 0.8s step-end infinite;
+}
+
+/* ---------- Glitch 故障标题特效 ---------- */
+.glitch {
+    position: relative;
+    display: inline-block;
+}
+
+.glitch::before,
+.glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+}
+
+.glitch::before {
+    color: rgb(255, 0, 80);
+    z-index: -1;
+    animation: glitch-shift-1 2.8s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+    color: rgb(0, 200, 255);
+    z-index: -1;
+    animation: glitch-shift-2 3.4s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-shift-1 {
+    0% { clip-path: inset(20% 0 60% 0); transform: translate(-3px, -1px); }
+    20% { clip-path: inset(70% 0 10% 0); transform: translate(2px, 1px); }
+    40% { clip-path: inset(40% 0 45% 0); transform: translate(-2px, 2px); }
+    60% { clip-path: inset(10% 0 80% 0); transform: translate(3px, -2px); }
+    80% { clip-path: inset(55% 0 25% 0); transform: translate(-3px, 1px); }
+    100% { clip-path: inset(30% 0 55% 0); transform: translate(2px, -1px); }
+}
+
+@keyframes glitch-shift-2 {
+    0% { clip-path: inset(60% 0 15% 0); transform: translate(3px, 1px); }
+    20% { clip-path: inset(15% 0 70% 0); transform: translate(-2px, -1px); }
+    40% { clip-path: inset(45% 0 35% 0); transform: translate(2px, -2px); }
+    60% { clip-path: inset(75% 0 5% 0); transform: translate(-3px, 2px); }
+    80% { clip-path: inset(25% 0 60% 0); transform: translate(3px, -1px); }
+    100% { clip-path: inset(50% 0 30% 0); transform: translate(-2px, 1px); }
+}
+
+/* 博客标题 hover 时触发 glitch */
+.logo a {
+    position: relative;
+    display: inline-block;
+}
+
+.logo a::before,
+.logo a::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.logo a:hover::before {
+    color: rgb(255, 0, 80);
+    opacity: 0.8;
+    animation: glitch-shift-1 0.5s infinite linear alternate-reverse;
+}
+
+.logo a:hover::after {
+    color: rgb(0, 200, 255);
+    opacity: 0.8;
+    animation: glitch-shift-2 0.6s infinite linear alternate-reverse;
 }
 
 /* ---------- 导航栏：终端风格 ---------- */

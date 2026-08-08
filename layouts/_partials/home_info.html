@@ -7,6 +7,8 @@
         {{ $opts := dict "display" "block" }}
         {{ .Content | $.Page.RenderString $opts }}
     </div>
+    {{- /* 打字机开场（Matrix 风格） */ -}}
+    <div id="matrix-typed" aria-label="Wake up, Neo...">Wake up, Neo...</div>
     <footer class="entry-footer">
         {{ partial "social_icons.html" (dict "align" site.Params.homeInfoParams.AlignSocialIconsTo) }}
     </footer>
