@@ -241,6 +241,109 @@ body::before {
     box-shadow: inset 0 0 24px rgba(0, 255, 65, 0.05);
 }
 
+/* ===== Matrix 风格代码高亮（覆盖 Dracula） ===== */
+/* 背景：深绿黑 */
+.chroma {
+    background-color: rgb(3, 12, 3) !important;
+}
+.chroma table, .chroma code, .chroma pre {
+    background-color: transparent !important;
+}
+
+/* 无高亮代码块 / pre 默认文字色（覆盖 md-content.css 的 rgb(213,213,214)） */
+.md-content pre,
+.post-content pre,
+.highlight pre,
+pre {
+    color: rgb(170, 240, 195) !important;
+    background-color: rgb(3, 12, 3) !important;
+}
+
+/* 默认文字：淡绿 */
+.chroma {
+    color: rgb(170, 240, 195) !important;
+}
+
+/* 注释：暗绿斜体 */
+.chroma .c, .chroma .c1, .chroma .cm, .chroma .cp, .chroma .cs,
+.chroma .ch, .chroma .cd, .chroma .cpf {
+    color: rgb(60, 140, 90) !important;
+    font-style: italic;
+}
+
+/* 关键字：亮绿 */
+.chroma .k, .chroma .kc, .chroma .kd, .chroma .kn, .chroma .kp,
+.chroma .kr, .chroma .kt, .chroma .kv {
+    color: rgb(0, 255, 65) !important;
+    font-weight: bold;
+}
+
+/* 字符串：青绿 */
+.chroma .s, .chroma .s1, .chroma .s2, .chroma .sb, .chroma .sc,
+.chroma .sd, .chroma .se, .chroma .sh, .chroma .si, .chroma .sx,
+.chroma .sr, .chroma .ss, .chroma .sa, .chroma .dl {
+    color: rgb(80, 220, 130) !important;
+}
+
+/* 数字：亮青 */
+.chroma .m, .chroma .mb, .chroma .mf, .chroma .mh, .chroma .mi,
+.chroma .il, .chroma .mo, .chroma .mx {
+    color: rgb(140, 255, 200) !important;
+}
+
+/* 函数名/类型：荧光绿 */
+.chroma .nf, .chroma .nx, .chroma .na, .chroma .nc, .chroma .no {
+    color: rgb(0, 230, 118) !important;
+}
+
+/* 操作符/标点：亮绿 */
+.chroma .o, .chroma .p, .chroma .ow, .chroma .nt {
+    color: rgb(0, 255, 65) !important;
+}
+
+/* 变量/属性名：浅绿 */
+.chroma .n, .chroma .nb, .chroma .bp, .chroma .nl, .chroma .nn,
+.chroma .nv, .chroma .vc, .chroma .vg, .chroma .vi, .chroma .vm {
+    color: rgb(170, 240, 195) !important;
+}
+
+/* 行号：暗绿 */
+.chroma .ln, .chroma .lnt, .chroma .linenos {
+    color: rgb(40, 100, 60) !important;
+}
+
+/* 内置常量：亮青绿 */
+.chroma .nb, .chroma .kc, .chroma .kp {
+    color: rgb(0, 220, 120) !important;
+}
+
+/* 错误/警告：红色系保留（语义色） */
+.chroma .err {
+    color: rgb(255, 80, 80) !important;
+}
+
+/* 反引号/特殊：淡青 */
+.chroma .gi, .chroma .gd, .chroma .gh, .chroma .gu, .chroma .gp,
+.chroma .cl {
+    color: rgb(170, 240, 195) !important;
+}
+
+/* 代码复制按钮 */
+.copy-code {
+    color: var(--primary) !important;
+    background: rgba(0, 40, 15, 0.9) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 4px !important;
+    font-family: "Share Tech Mono", Consolas, monospace !important;
+    font-size: 0.75em !important;
+    transition: all 0.2s ease !important;
+}
+
+.copy-code:hover {
+    border-color: var(--primary) !important;
+    box-shadow: var(--neon-glow) !important;
+}
+
 /* 行内代码 */
 .post-content code:not(pre code) {
     background: rgba(0, 255, 65, 0.08);
@@ -248,6 +351,41 @@ body::before {
     border: 1px solid rgba(0, 255, 65, 0.2);
     padding: 1px 6px;
     border-radius: 3px;
+}
+
+/* ---------- 表格：绿系 ---------- */
+.post-content table,
+.entry-content table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.post-content th,
+.entry-content th {
+    background: rgba(0, 255, 65, 0.1);
+    color: var(--primary);
+    border: 1px solid var(--border);
+    padding: 8px 12px;
+    font-weight: bold;
+    text-shadow: var(--neon-glow);
+}
+
+.post-content td,
+.entry-content td {
+    color: var(--content);
+    border: 1px solid var(--border);
+    padding: 8px 12px;
+    background: rgba(0, 20, 8, 0.3);
+}
+
+.post-content tr:nth-child(even) td,
+.entry-content tr:nth-child(even) td {
+    background: rgba(0, 40, 15, 0.2);
+}
+
+.post-content tr:hover td,
+.entry-content tr:hover td {
+    background: rgba(0, 255, 65, 0.06);
 }
 
 /* ---------- 标签：发光胶囊 ---------- */

@@ -10,7 +10,8 @@ markup:
     codeFences: true
     guessSyntax: true
     lineNos: true
-    style: "dracula"
+    noClasses: false
+    style: "catppuccin-mocha"
   goldmark:
     renderer:
       unsafe: true
