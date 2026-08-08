@@ -1,8 +1,15 @@
 {{- /* Head custom content area start */ -}}
+
+{{- /* Share Tech Mono 等宽字体（Matrix 风格） */ -}}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
 {{- /* Umami Analytics */ -}}
 {{- with .Site.Params.umami }}
 {{- if .websiteID }}
 <script defer src="https://cloud.umami.is/script.js" data-website-id="{{ .websiteID }}"></script>
 {{- end }}
 {{- end }}
+
 {{- /* Head custom content area end */ -}}
