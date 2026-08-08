@@ -14,3 +14,6 @@ Thumbs.db
 
 # Hugo cache
 .hugo_cache/
+
+# Node
+node_modules/

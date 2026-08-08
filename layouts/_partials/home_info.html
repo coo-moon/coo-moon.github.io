@@ -1,0 +1,67 @@
+{{- with site.Params.homeInfoParams }}
+<article class="first-entry home-info">
+    <header class="entry-header">
+        <h1>{{ .Title | markdownify }}</h1>
+    </header>
+    <div class="entry-content md-content">
+        {{ $opts := dict "display" "block" }}
+        {{ .Content | $.Page.RenderString $opts }}
+    </div>
+    <footer class="entry-footer">
+        {{ partial "social_icons.html" (dict "align" site.Params.homeInfoParams.AlignSocialIconsTo) }}
+    </footer>
+</article>
+{{- end -}}
+
+{{- /* 板块卡片导航 */ -}}
+<section class="section-cards">
+    {{- $sections := where site.Sections "Kind" "section" -}}
+    {{- $showSections := site.Params.homeSections | default (slice "ai" "tech" "invest" "games") -}}
+    {{- range $sections -}}
+        {{- if in $showSections .Section -}}
+        <a class="section-card" href="{{ .RelPermalink }}">
+            <h3>{{ .Title }}</h3>
+            <p>{{ .Description | default (printf "%d 篇文章" (len .RegularPages)) }}</p>
+            <span class="section-card-count">{{ len .RegularPages }} 篇 →</span>
+        </a>
+        {{- end -}}
+    {{- end -}}
+</section>
+
+<style>
+.section-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    margin: 24px 0;
+}
+.section-card {
+    display: block;
+    padding: 20px 22px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--entry);
+    text-decoration: none !important;
+    transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+}
+.section-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(0,0,0,.12);
+    border-color: var(--primary);
+}
+.section-card h3 {
+    margin: 0 0 8px;
+    font-size: 1.1em;
+    color: var(--primary);
+}
+.section-card p {
+    margin: 0 0 12px;
+    font-size: .88em;
+    color: var(--secondary);
+    line-height: 1.5;
+}
+.section-card-count {
+    font-size: .8em;
+    color: var(--tertiary);
+}
+</style>

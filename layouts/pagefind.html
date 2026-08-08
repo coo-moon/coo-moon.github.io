@@ -1,0 +1,31 @@
+{{- define "main" }}
+<div class="page-header">
+  <h1>🔍 搜索</h1>
+  <div class="post-description">
+    全文检索所有文章 — 支持中文、代码、标题与正文
+  </div>
+</div>
+
+<div class="post-content">
+  {{- .Content }}
+  <div id="search"></div>
+</div>
+
+<link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+<script src="/pagefind/pagefind-ui.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    new PagefindUI({
+      element: "#search",
+      showSubResults: true,
+      showImages: false,
+      translations: {
+        placeholder: "输入关键词搜索…",
+        zero_results: "没有找到结果，换个关键词试试",
+        search: "搜索",
+        loading: "加载中…"
+      }
+    });
+  });
+</script>
+{{- end }}
