@@ -1,5 +1,5 @@
 ---
-title: "📈 投资笔记"
+title: "投资笔记"
 description: "A股投资记录与市场观察"
 layout: "list"
 ---

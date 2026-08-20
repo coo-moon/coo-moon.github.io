@@ -13,17 +13,29 @@
         {{ partial "social_icons.html" (dict "align" site.Params.homeInfoParams.AlignSocialIconsTo) }}
     </footer>
 </article>
-{{- end -}}
+{{- end }}
 
-{{- /* 板块卡片导航 */ -}}
+{{- /* 板块卡片导航（终端风格 + 线性图标） */ -}}
+{{- $icons := dict
+    "ai"     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6" rx="1"/><path d="M9 1.5V4M15 1.5V4M9 20v2.5M15 20v2.5M1.5 9H4M1.5 15H4M20 9h2.5M20 15h2.5"/></svg>`
+    "papers" `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>`
+    "tech"   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>`
+    "invest" `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>`
+    "games"  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 12h4M8 10v4"/><circle cx="15" cy="11" r="1"/><circle cx="18" cy="13" r="1"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"/></svg>`
+-}}
 <section class="section-cards">
     {{- $sections := where site.Sections "Kind" "section" -}}
     {{- $showSections := site.Params.homeSections | default (slice "ai" "tech" "invest" "games") -}}
     {{- range $sections -}}
         {{- if in $showSections .Section -}}
         <a class="section-card" href="{{ .RelPermalink }}">
+            <span class="section-card-top">
+                <span class="section-card-icon">{{ index $icons .Section | safeHTML }}</span>
+                <span class="section-card-dots"><i></i><i></i><i></i></span>
+            </span>
             <h3>{{ .Title }}</h3>
-            <p>{{ .Description | default (printf "%d 篇文章" (len .RegularPages)) }}</p>
+            <p class="section-card-path">~/{{ .Section }}</p>
+            <p class="section-card-desc">{{ .Description | default (printf "%d 篇文章" (len .RegularPages)) }}</p>
             <span class="section-card-count">{{ len .RegularPages }} 篇 →</span>
         </a>
         {{- end -}}
@@ -33,37 +45,102 @@
 <style>
 .section-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 16px;
-    margin: 24px 0;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 14px;
+    margin: 28px 0 8px;
 }
 .section-card {
     display: block;
-    padding: 20px 22px;
-    border-radius: 12px;
+    position: relative;
+    padding: 16px 18px 14px;
+    border-radius: 10px;
     border: 1px solid var(--border);
-    background: var(--entry);
+    background:
+        linear-gradient(160deg, color-mix(in srgb, var(--entry) 88%, transparent), var(--entry) 55%);
     text-decoration: none !important;
-    transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+    overflow: hidden;
+    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.section-card::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 2px;
+    background: var(--primary);
+    opacity: .45;
+    transition: opacity .18s ease, width .18s ease;
 }
 .section-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 6px 18px rgba(0,0,0,.12);
     border-color: var(--primary);
+    box-shadow: 0 8px 24px rgba(0,0,0,.28), 0 0 18px rgba(0,255,65,.08);
 }
-.section-card h3 {
-    margin: 0 0 8px;
-    font-size: 1.1em;
+.section-card:hover::before {
+    opacity: 1;
+    width: 3px;
+}
+.section-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+.section-card-icon {
+    display: inline-flex;
+    width: 34px;
+    height: 34px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    border: 1px solid color-mix(in srgb, var(--primary) 35%, var(--border));
     color: var(--primary);
+    background: color-mix(in srgb, var(--primary) 7%, transparent);
+    transition: transform .18s ease, box-shadow .18s ease;
 }
-.section-card p {
+.section-card-icon svg {
+    width: 18px;
+    height: 18px;
+}
+.section-card:hover .section-card-icon {
+    transform: scale(1.06);
+    box-shadow: 0 0 10px rgba(0,255,65,.25);
+}
+.section-card-dots {
+    display: inline-flex;
+    gap: 4px;
+}
+.section-card-dots i {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--tertiary);
+    opacity: .8;
+}
+.section-card-dots i:nth-child(1) { background: #ff5f56; opacity: .55; }
+.section-card-dots i:nth-child(2) { background: #ffbd2e; opacity: .55; }
+.section-card-dots i:nth-child(3) { background: #27c93f; opacity: .55; }
+.section-card h3 {
+    margin: 0 0 6px;
+    font-size: 1.08em;
+    color: var(--content);
+    letter-spacing: .02em;
+}
+.section-card-path {
+    margin: 0 0 8px;
+    font-size: .78em;
+    font-family: "Share Tech Mono", Consolas, monospace;
+    color: var(--primary);
+    opacity: .85;
+}
+.section-card-desc {
     margin: 0 0 12px;
-    font-size: .88em;
+    font-size: .85em;
     color: var(--secondary);
-    line-height: 1.5;
+    line-height: 1.55;
 }
 .section-card-count {
-    font-size: .8em;
+    font-size: .78em;
     color: var(--tertiary);
+    letter-spacing: .04em;
 }
 </style>

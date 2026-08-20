@@ -1,5 +1,5 @@
 ---
-title: "📄 论文专栏"
+title: "论文专栏"
 description: "前沿论文精读与解读：Transformer、世界模型、多模态等"
 layout: "list"
 ---

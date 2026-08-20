@@ -41,6 +41,9 @@ params:
   # 首页板块卡片（对应各 section，顺序即展示顺序）
   homeSections: ["ai", "papers", "tech", "invest", "games"]
 
+  # 首页文章列表收录的板块（Hugo 默认只取第一个有内容的 section，必须显式声明）
+  mainSections: ["ai", "papers", "tech", "invest", "games"]
+
   socialIcons:
     - name: github
       url: "https://github.com/coo-moon"
@@ -81,39 +84,39 @@ params:
 menu:
   main:
     - identifier: ai
-      name: 🤖 AI 学习
+      name: "AI 学习"
       url: /ai/
       weight: 10
     - identifier: papers
-      name: 📄 论文专栏
+      name: "论文专栏"
       url: /papers/
       weight: 15
     - identifier: tech
-      name: 💻 技术实践
+      name: "技术实践"
       url: /tech/
       weight: 20
     - identifier: invest
-      name: 📈 投资笔记
+      name: "投资笔记"
       url: /invest/
       weight: 30
     - identifier: games
-      name: 🎮 游戏生活
+      name: "游戏生活"
       url: /games/
       weight: 40
     - identifier: tags
-      name: 🏷️ 标签
+      name: "标签"
       url: /tags/
       weight: 50
     - identifier: archives
-      name: 📁 归档
+      name: "归档"
       url: /archives/
       weight: 60
     - identifier: search
-      name: 🔍 搜索
+      name: "搜索"
       url: /search/
       weight: 70
     - identifier: about
-      name: 👋 关于
+      name: "关于"
       url: /about/
       weight: 80
 

@@ -1,5 +1,5 @@
 ---
-title: "🤖 AI 学习笔记"
+title: "AI 学习"
 description: "大模型、深度学习、Agent 开发的学习笔记与实战"
 layout: "list"
 ---

@@ -1,5 +1,5 @@
 ---
-title: "🎮 游戏生活"
+title: "游戏生活"
 description: "游戏体验、生活随笔"
 layout: "list"
 ---

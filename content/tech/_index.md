@@ -1,5 +1,5 @@
 ---
-title: "💻 技术实践"
+title: "技术实践"
 description: "编程、工具、博客搭建等动手实践记录"
 layout: "list"
 ---
