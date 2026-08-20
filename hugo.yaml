@@ -38,6 +38,9 @@ params:
       - 💻 编程 / 工具 / 效率
       - 📚 学习笔记与思考
 
+  # 首页板块卡片（对应各 section，顺序即展示顺序）
+  homeSections: ["ai", "papers", "tech", "invest", "games"]
+
   socialIcons:
     - name: github
       url: "https://github.com/coo-moon"
@@ -81,6 +84,10 @@ menu:
       name: 🤖 AI 学习
       url: /ai/
       weight: 10
+    - identifier: papers
+      name: 📄 论文专栏
+      url: /papers/
+      weight: 15
     - identifier: tech
       name: 💻 技术实践
       url: /tech/
@@ -124,6 +131,7 @@ sitemap:
 # 永久链接格式（板块文章仍输出到 /posts/:slug/，保持旧链接不变）
 permalinks:
   ai: /posts/:slug/
+  papers: /posts/:slug/
   tech: /posts/:slug/
   invest: /posts/:slug/
   games: /posts/:slug/
