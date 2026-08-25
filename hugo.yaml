@@ -39,10 +39,10 @@ params:
       - 📚 学习笔记与思考
 
   # 首页板块卡片（对应各 section，顺序即展示顺序）
-  homeSections: ["ai", "papers", "tech", "invest", "games"]
+  homeSections: ["ai", "papers", "tech", "database", "invest", "games"]
 
   # 首页文章列表收录的板块（Hugo 默认只取第一个有内容的 section，必须显式声明）
-  mainSections: ["ai", "papers", "tech", "invest", "games"]
+  mainSections: ["ai", "papers", "tech", "database", "invest", "games"]
 
   socialIcons:
     - name: github
