@@ -3,7 +3,7 @@ title: "向量数据库凭什么毫秒级\"大海捞针\"？拆解 HNSW 分层�
 date: 2026-08-22
 draft: false
 tags: ["向量数据库", "HNSW", "ANN 检索", "RAG", "数据库内核"]
-categories: ["AI 学习笔记"]
+categories: ["数据库"]
 slug: "hnsw-vector-database-index"
 summary: "RAG 应用为什么能做到毫秒级\"大海捞针\"？从六度分隔理论到跳表分层，拆解向量数据库最主流索引 HNSW 的原理、参数与选型权衡。"
 ---
