@@ -3,7 +3,7 @@ title: "Hermes Agent 接入 OpenViking：给 AI 助手装上一个「上下文�
 date: 2026-08-25
 draft: false
 tags: ["AI Agent", "OpenViking", "Hermes", "记忆系统", "火山引擎"]
-categories: ["技术实践"]
+categories: ["数据库"]
 slug: "hermes-openviking-setup"
 summary: "手把手把开源的 OpenViking 上下文数据库接入 Hermes Agent：云服务开通、API 配置、资源挂载、语义检索实测，以及踩过的坑。"
 ---

@@ -95,6 +95,10 @@ menu:
       name: "技术实践"
       url: /tech/
       weight: 20
+    - identifier: database
+      name: "数据库"
+      url: /database/
+      weight: 25
     - identifier: invest
       name: "投资笔记"
       url: /invest/
@@ -136,5 +140,6 @@ permalinks:
   ai: /posts/:slug/
   papers: /posts/:slug/
   tech: /posts/:slug/
+  database: /posts/:slug/
   invest: /posts/:slug/
   games: /posts/:slug/
