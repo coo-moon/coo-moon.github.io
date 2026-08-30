@@ -1,13 +1,58 @@
 {{- /* Footer custom content area start */ -}}
 
-{{- /* ===== Matrix 数字雨背景（Rezmason/matrix WebGL 版） ===== */ -}}
-<iframe id="matrix-rain" src="/matrix/?skipIntro=true&suppressWarnings=true&fallSpeed=1.3&bloomStrength=0.5&brightnessDecay=0.3&resolution=0.75" title="Matrix Rain" loading="eager" frameborder="0" allowfullscreen></iframe>
+{{- /* ===== Matrix 数字雨（Rezmason/matrix WebGL 版）：仅夜间模式，由下方脚本动态挂载 ===== */ -}}
+
+{{- /* 首页打字机（Typed.js） */ -}}
+{{- if .IsHome }}
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.1.0/dist/typed.umd.js"></script>
+{{- end }}
 
 <script>
 (function () {
-    // Matrix 数字雨 iframe 背景控制
-    const frame = document.getElementById('matrix-rain');
-    if (!frame) return;
+    // 数字雨只在暗色模式跑；亮色模式下卸载 iframe 省资源
+    const html = document.documentElement;
+    let frame = document.getElementById('matrix-rain');
+
+    function isDark() {
+        return html.dataset.theme === 'dark';
+    }
+
+    function applyThemeEffects() {
+        if (isDark()) {
+            if (!frame) {
+                frame = document.createElement('iframe');
+                frame.id = 'matrix-rain';
+                frame.title = 'Matrix Rain';
+                frame.setAttribute('loading', 'eager');
+                frame.setAttribute('frameborder', '0');
+                frame.src = '/matrix/?skipIntro=true&suppressWarnings=true&fallSpeed=1.3&bloomStrength=0.5&brightnessDecay=0.3&resolution=0.75';
+                document.body.appendChild(frame);
+                bindRain(frame);
+            } else {
+                frame.style.display = '';
+            }
+        } else if (frame) {
+            frame.style.display = 'none';
+        }
+    }
+
+    function bindRain(el) {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            el.style.display = 'none';
+            return;
+        }
+        // 滚动时淡出，静止时恢复（减少阅读干扰）
+        let scrollTimer = null;
+        window.addEventListener('scroll', function () {
+            if (el.style.display === 'none') return;
+            el.style.opacity = '0.08';
+            clearTimeout(scrollTimer);
+            scrollTimer = setTimeout(function () {
+                el.style.opacity = '0.5';
+            }, 400);
+        }, { passive: true });
+        el.style.opacity = '0.5';
+    }
 
     // Logo glitch data-text
     const logoLink = document.querySelector('.logo a');
@@ -15,54 +60,61 @@
         logoLink.dataset.text = logoLink.textContent.trim();
     }
 
-    // 滚动时淡出，静止时恢复（减少阅读干扰）
-    let scrollTimer = null;
-    function onScroll() {
-        frame.style.opacity = '0.08';
-        clearTimeout(scrollTimer);
-        scrollTimer = setTimeout(function () {
-            frame.style.opacity = '0.5';
-        }, 400);
-    }
-    window.addEventListener('scroll', onScroll, { passive: true });
+    applyThemeEffects();
 
-    // 尊重 prefers-reduced-motion
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        frame.style.display = 'none';
-        return;
+    // 切换主题时同步（PaperMod 的 toggle 直接改 data-theme，用 MutationObserver 监听）
+    new MutationObserver(function () {
+        applyThemeEffects();
+        updateTypedStrings();
+    }).observe(html, { attributes: true, attributeFilter: ['data-theme'] });
+
+    // ===== 首页打字机文案（随主题切换风格） =====
+    const DARK_STRINGS = [
+        '> Wake up, Neo...',
+        '> The Matrix has you...',
+        '> Follow the white rabbit.',
+        '> Knock, knock, Neo.'
+    ];
+    const LIGHT_STRINGS = [
+        '你好，我是 Wenbo ✦ 这里记录 AI 与折腾日常',
+        '🚀 正在探索大模型 · Agent · 量化 · 后端',
+        '🛰️ 每天进步一点点，保持好奇，保持可爱',
+        '☕ 写代码，也写生活 —— 欢迎常来坐坐'
+    ];
+
+    let typedInstance = null;
+
+    function currentStrings() {
+        return isDark() ? DARK_STRINGS : LIGHT_STRINGS;
     }
 
-    frame.style.opacity = '0.5';
+    function updateTypedStrings() {
+        const el = document.getElementById('matrix-typed');
+        if (!el || typeof Typed === 'undefined') return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            el.textContent = isDark() ? 'Wake up, Neo...' : '你好，我是 Wenbo ✦';
+            return;
+        }
+        if (typedInstance) {
+            typedInstance.destroy();
+            typedInstance = null;
+        }
+        el.textContent = '';
+        typedInstance = new Typed(el, {
+            strings: currentStrings(),
+            typeSpeed: isDark() ? 55 : 45,
+            backSpeed: 22,
+            backDelay: 2200,
+            loop: true,
+            showCursor: true,
+            cursorChar: isDark() ? '▊' : '❍'
+        });
+    }
+
+    if (document.getElementById('matrix-typed')) {
+        updateTypedStrings();
+    }
 })();
 </script>
-
-{{- /* ===== 首页打字机效果（Typed.js） ===== */ -}}
-{{- if .IsHome }}
-<script src="https://cdn.jsdelivr.net/npm/typed.js@2.1.0/dist/typed.umd.js"></script>
-<script>
-(function () {
-    const el = document.getElementById('matrix-typed');
-    if (!el || typeof Typed === 'undefined') return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        el.textContent = 'Wake up, Neo...';
-        return;
-    }
-    new Typed(el, {
-        strings: [
-            '> Wake up, Neo...',
-            '> The Matrix has you...',
-            '> Follow the white rabbit.',
-            '> Knock, knock, Neo.'
-        ],
-        typeSpeed: 55,
-        backSpeed: 25,
-        backDelay: 1800,
-        loop: true,
-        showCursor: true,
-        cursorChar: '▊'
-    });
-})();
-</script>
-{{- end }}
 
 {{- /* Footer custom content area end */ -}}

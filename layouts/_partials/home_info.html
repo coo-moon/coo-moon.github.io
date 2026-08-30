@@ -74,7 +74,13 @@
 .section-card:hover {
     transform: translateY(-3px);
     border-color: var(--primary);
+}
+html[data-theme="dark"] .section-card:hover {
     box-shadow: 0 8px 24px rgba(0,0,0,.28), 0 0 18px rgba(0,255,65,.08);
+}
+html[data-theme="light"] .section-card:hover {
+    border-color: rgba(79,124,255,.55);
+    box-shadow: 0 10px 24px rgba(79,124,255,.14);
 }
 .section-card:hover::before {
     opacity: 1;
@@ -102,9 +108,13 @@
     width: 18px;
     height: 18px;
 }
-.section-card:hover .section-card-icon {
+html[data-theme="dark"] .section-card:hover .section-card-icon {
     transform: scale(1.06);
     box-shadow: 0 0 10px rgba(0,255,65,.25);
+}
+html[data-theme="light"] .section-card:hover .section-card-icon {
+    transform: scale(1.06) rotate(-4deg);
+    box-shadow: 0 4px 12px rgba(79,124,255,.25);
 }
 .section-card-dots {
     display: inline-flex;
@@ -132,6 +142,11 @@
     font-family: "Share Tech Mono", Consolas, monospace;
     color: var(--primary);
     opacity: .85;
+}
+html[data-theme="light"] .section-card-path {
+    color: var(--accent, #4f7cff);
+    font-family: "JetBrains Mono", Consolas, monospace;
+    opacity: 1;
 }
 .section-card-desc {
     margin: 0 0 12px;
