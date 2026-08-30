@@ -71,7 +71,7 @@ html[data-theme="dark"] .post-description {
 }
 
 html[data-theme="light"] .post-single .post-content {
-    font-family: "Quicksand", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+    font-family: "Inter", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
 }
 
 .post-single .post-content p {

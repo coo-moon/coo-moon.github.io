@@ -1,58 +1,52 @@
 /* ============================================================
-   DAYLIGHT THEME — 简约明亮 · 白底 · 可爱 + 轻科幻
-   仅作用于 data-theme="light"，夜间 Matrix 风格不受影响
+   DAYLIGHT THEME v2 — 借鉴社区优秀明亮设计（Vercel / Linear / Notion）
+   原则：暖白底、大量留白、克制配色、细边框、极淡阴影、编辑感排版
+   仅作用于 data-theme="light"，夜间 Matrix 风格完全不受影响
    ============================================================ */
 
 :root[data-theme="light"] {
-    --radius: 14px;
+    --radius: 12px;
 
-    /* 基础：纯白 + 蓝灰墨色 */
-    --theme: #ffffff;
+    /* 暖白纸感底色（非冷白，参考 Notion / Stripe） */
+    --theme: #fcfcfb;
     --entry: #ffffff;
-    --primary: #1e2a4a;      /* 标题：深墨蓝 */
-    --secondary: #5b6b8c;    /* 次级文字：蓝灰 */
-    --tertiary: #a7b6d1;     /* 弱化文字 */
-    --content: #33415e;      /* 正文 */
-    --code-block-bg: #101828;
-    --code-bg: #f5f8ff;      /* 列表页底色：极淡蓝白 */
-    --border: #e3ebf7;
+    --primary: #18181b;      /* 标题：近黑，Notion/Vercel 式中性 */
+    --secondary: #6b6b6b;    /* 次级文字 */
+    --tertiary: #b4b4b0;     /* 弱化文字 */
+    --content: #37352f;      /* 正文：Notion 暖墨色 */
+    --code-block-bg: #16181d;
+    --code-bg: #fcfcfb;      /* 列表页底色：暖白 */
+    --border: #ececea;       /* 极淡暖边框 */
 
-    /* 点缀色：明亮蓝 + 薰衣草紫 + 樱粉 */
-    --accent: #4f7cff;
-    --accent-2: #8b5cf6;
-    --accent-3: #f472b6;
-    --accent-soft: rgba(79, 124, 255, 0.10);
+    /* 单一沉稳点缀色（Indigo，克制使用）+ 一点点粉做可爱点缀 */
+    --accent: #3b5bfd;
+    --accent-ink: #2a3f9e;
+    --pink: #e56399;
+    --accent-soft: rgba(59, 91, 253, 0.08);
 
-    /* 派生色（与 matrix.css 共用的变量接口） */
-    --heading-rule: #e3ebf7;
-    --h3-color: #3b5bdb;
-    --strong-color: #16213e;
-    --pre-fg: #d7e2f7;
-    --pre-bg: #101828;
+    /* 派生色（matrix.css 共用的变量接口） */
+    --heading-rule: #ececea;
+    --h3-color: #18181b;
+    --strong-color: #18181b;
+    --pre-fg: #d7dbe6;
+    --pre-bg: #16181d;
     --entry-grad-a: #ffffff;
-    --entry-grad-b: #fbfdff;
-    --card-glow: rgba(79, 124, 255, 0.18);
-    --quote-bg: #f6f9ff;
-    --tag-bg: #eef4ff;
+    --entry-grad-b: #ffffff;
+    --card-glow: transparent;
+    --quote-bg: #f7f6f3;
+    --tag-bg: #f4f4f2;
     --neon-glow: none;
     --neon-glow-strong: none;
 
-    font-family: "Quicksand", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+    font-family: "Inter", ui-sans-serif, system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
     color-scheme: light;
 }
 
-/* ---------- 背景：方格星图 ---------- */
+/* ---------- 背景：纯净暖白，顶部一抹极淡光晕（克制） ---------- */
 html[data-theme="light"] body {
     background-color: var(--code-bg);
-    background-image:
-        /* 细网格：轻科幻图纸感 */
-        linear-gradient(rgba(79, 124, 255, 0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(79, 124, 255, 0.05) 1px, transparent 1px),
-        /* 稀疏星点 */
-        radial-gradient(circle, rgba(139, 92, 246, 0.14) 1.1px, transparent 1.1px),
-        radial-gradient(circle, rgba(79, 124, 255, 0.12) 1px, transparent 1px);
-    background-size: 28px 28px, 28px 28px, 168px 168px, 224px 224px;
-    background-position: 0 0, 0 0, 42px 66px, 130px 24px;
+    background-image: radial-gradient(1100px 420px at 50% -80px, rgba(59, 91, 253, 0.045), transparent 70%);
+    background-repeat: no-repeat;
     letter-spacing: 0;
 }
 
@@ -60,343 +54,416 @@ html[data-theme="light"] .list {
     background-color: var(--code-bg);
 }
 
-/* 文章页：更干净的纯白 */
-html[data-theme="light"] body:not(.list) {
-    background-color: #ffffff;
-    background-image:
-        radial-gradient(circle, rgba(139, 92, 246, 0.08) 1px, transparent 1px),
-        radial-gradient(circle, rgba(79, 124, 255, 0.07) 1px, transparent 1px);
-    background-size: 190px 190px, 240px 240px;
-}
-
-/* ---------- 装饰：右上角可爱星球 + 左下角流星 ---------- */
-html[data-theme="light"] body::after {
-    content: "";
-    position: fixed;
-    top: 74px;
-    right: 4vw;
-    width: 96px;
-    height: 96px;
-    z-index: -1;
-    pointer-events: none;
-    opacity: 0.9;
-    background-repeat: no-repeat;
-    background-size: contain;
-    animation: day-float 7s ease-in-out infinite;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='p' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23dbeafe'/%3E%3Cstop offset='1' stop-color='%23fbcfe8'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='50' cy='50' r='21' fill='url(%23p)'/%3E%3Cellipse cx='50' cy='50' rx='37' ry='11' fill='none' stroke='%238b5cf6' stroke-width='3.5' opacity='.55' transform='rotate(-18 50 50)'/%3E%3Ccircle cx='43' cy='46' r='2.6' fill='%2333415e'/%3E%3Ccircle cx='57' cy='46' r='2.6' fill='%2333415e'/%3E%3Cpath d='M45 55 Q50 59.5 55 55' stroke='%2333415e' stroke-width='2.4' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='66' cy='30' r='2' fill='%23f472b6'/%3E%3Ccircle cx='30' cy='66' r='1.6' fill='%234f7cff'/%3E%3C/svg%3E");
-}
-
-html[data-theme="light"] body::before {
-    content: "";
-    position: fixed;
-    bottom: 6vh;
-    left: 3vw;
-    width: 70px;
-    height: 70px;
-    z-index: -1;
-    pointer-events: none;
-    opacity: 0.75;
-    background-repeat: no-repeat;
-    background-size: contain;
-    animation: day-float 9s ease-in-out infinite reverse;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 20 L55 42 L78 38 L59 51 L74 68 L52 58 L50 82 L48 58 L26 68 L41 51 L22 38 L45 42 Z' fill='none' stroke='%238b5cf6' stroke-width='3' stroke-linejoin='round' opacity='.5'/%3E%3Ccircle cx='50' cy='51' r='6' fill='%23f472b6' opacity='.5'/%3E%3C/svg%3E");
-}
-
-@keyframes day-float {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-10px) rotate(4deg); }
-}
-
-@media (max-width: 900px) {
-    html[data-theme="light"] body::after {
-        width: 62px;
-        height: 62px;
-        top: 70px;
-        opacity: 0.7;
-    }
-    html[data-theme="light"] body::before {
-        display: none;
-    }
-}
-
-/* ---------- 正文字体 ---------- */
+/* 正文文字渲染：显式覆盖 PaperMod 的 body 字体声明（继承自 :root 会被它盖住） */
 html[data-theme="light"] body {
-    font-family: "Quicksand", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+    font-family: "Inter", ui-sans-serif, system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
 }
 
-html[data-theme="light"] .post-single .post-content {
-    font-family: "Quicksand", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+/* 列表/首页各处文字统一 Inter；代码/路径仍走 JetBrains Mono */
+html[data-theme="light"] .post-content,
+html[data-theme="light"] .entry-content,
+html[data-theme="light"] .post-description,
+html[data-theme="light"] .nav,
+html[data-theme="light"] .footer,
+html[data-theme="light"] .first-entry {
+    font-family: "Inter", ui-sans-serif, system-ui, "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
 }
 
-/* ---------- 标题 ---------- */
+/* 行内 code / 时间戳等保留等宽，避免全站字体冲突 */
+html[data-theme="light"] code,
+html[data-theme="light"] pre,
+html[data-theme="light"] kbd,
+html[data-theme="light"] .section-card-path {
+    font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+/* ---------- 首页标题：编辑感衬线 + 手写般俏皮（可爱来自字体本身） ---------- */
+html[data-theme="light"] .first-entry .entry-header h1,
 html[data-theme="light"] .page-header h1,
-html[data-theme="light"] .post-title,
-html[data-theme="light"] .first-entry .entry-header h1 {
+html[data-theme="light"] .post-title {
+    font-family: "Fraunces", Georgia, "Songti SC", serif;
+    font-weight: 600;
+    letter-spacing: -0.01em;
     color: var(--primary);
-    background: linear-gradient(120deg, var(--accent), var(--accent-2) 60%, var(--accent-3));
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-text-fill-color: initial;
+    background: none;
 }
 
 html[data-theme="light"] .first-entry .entry-header h1 {
-    font-size: 2.1em;
-    font-weight: 700;
+    font-size: 2.15em;
 }
 
-/* h2 加可爱小星号 */
-html[data-theme="light"] .post-single .post-content h2::before {
-    content: "✦ ";
-    color: var(--accent-3);
-    font-size: 0.8em;
-    vertical-align: 0.15em;
-}
-
-/* ---------- 导航栏：白色磨砂 ---------- */
+/* ---------- 导航栏：暖白磨砂，细边框，无重阴影 ---------- */
 html[data-theme="light"] .nav {
     border-bottom: 1px solid var(--border);
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(8px);
-    box-shadow: 0 2px 12px rgba(30, 42, 74, 0.05);
+    background: rgba(252, 252, 251, 0.8);
+    backdrop-filter: saturate(180%) blur(10px);
+    box-shadow: none;
 }
 
 html[data-theme="light"] .nav a:hover {
-    color: var(--accent);
-}
-
-/* ---------- 文章卡片：白色圆角软阴影 ---------- */
-html[data-theme="light"] .post-entry {
-    background: linear-gradient(160deg, #ffffff, #fbfdff);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    box-shadow: 0 2px 10px rgba(30, 42, 74, 0.05);
-}
-
-html[data-theme="light"] .post-entry::after {
-    content: "✦";
-    color: var(--accent-3);
-    opacity: 0.45;
-    font-size: 0.9em;
-    transition: opacity 0.2s ease, transform 0.2s ease;
-}
-
-html[data-theme="light"] .post-entry:hover {
-    transform: translateY(-3px);
-    border-color: rgba(79, 124, 255, 0.55);
-    box-shadow: 0 10px 28px rgba(79, 124, 255, 0.14);
-}
-
-html[data-theme="light"] .post-entry:hover::after {
-    opacity: 1;
-    transform: scale(1.25) rotate(15deg);
-}
-
-html[data-theme="light"] .post-entry .entry-header h2 {
     color: var(--primary);
 }
 
-html[data-theme="light"] .post-entry .entry-footer {
-    font-family: "JetBrains Mono", Consolas, monospace;
-    font-size: 0.78em;
+/* 导航项：中性、克制 */
+html[data-theme="light"] .menu a {
+    color: var(--secondary);
+    font-weight: 500;
 }
 
-/* ---------- 板块卡片：明亮便签风 ---------- */
+html[data-theme="light"] .menu a:hover {
+    color: var(--primary);
+}
+
+/* ---------- Logo：衬线，编辑感 ---------- */
+html[data-theme="light"] .logo a {
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--primary);
+}
+
+/* ---------- 文章卡片：无卡片化，Notion 式"内容即列表" ---------- */
+/* 主列表：去掉重边框，用细分隔线 + 悬停轻浮，留白拉开 */
+html[data-theme="light"] .post-entry {
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: var(--radius);
+    box-shadow: none;
+    padding: 18px 18px 16px;
+    transition: background .18s ease, border-color .18s ease;
+}
+
+html[data-theme="light"] .post-entry::after {
+    content: none; /* 移除装饰角标，保持干净 */
+}
+
+html[data-theme="light"] .post-entry:hover {
+    background: #ffffff;
+    border-color: var(--border);
+    box-shadow: 0 1px 3px rgba(24, 24, 27, 0.05), 0 8px 24px -12px rgba(24, 24, 27, 0.10);
+    transform: none;
+}
+
+html[data-theme="light"] .post-entry .entry-header h2 {
+    font-family: "Inter", "PingFang SC", sans-serif;
+    font-weight: 600;
+    font-size: 1.28em;
+    letter-spacing: -0.01em;
+    color: var(--primary);
+}
+
+html[data-theme="light"] .post-entry .entry-content {
+    color: var(--secondary);
+    line-height: 1.7;
+}
+
+html[data-theme="light"] .post-entry .entry-footer {
+    font-family: "Inter", sans-serif;
+    font-size: .82em;
+    color: var(--tertiary);
+    letter-spacing: 0;
+}
+
+/* ---------- 板块卡片：细边框 + 大量留白，克制 ---------- */
+html[data-theme="light"] .section-cards {
+    gap: 16px;
+    margin: 32px 0 12px;
+}
+
 html[data-theme="light"] .section-card {
     background: #ffffff;
+    border: 1px solid var(--border);
     border-radius: var(--radius);
-    box-shadow: 0 2px 10px rgba(30, 42, 74, 0.05);
+    box-shadow: 0 1px 2px rgba(24, 24, 27, 0.04);
+    padding: 22px 24px;
+    transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+}
+
+html[data-theme="light"] .section-card::before {
+    display: none; /* 去掉左侧色条，更干净 */
 }
 
 html[data-theme="light"] .section-card::after {
-    content: "🚀";
+    content: "→";
     position: absolute;
-    bottom: 12px;
-    right: 14px;
-    font-size: 0.95em;
+    bottom: 20px;
+    right: 22px;
+    color: var(--tertiary);
+    font-size: 1em;
     opacity: 0;
-    transform: translateY(6px);
-    transition: all 0.25s ease;
+    transform: translateX(-4px);
+    transition: all .2s ease;
 }
 
 html[data-theme="light"] .section-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(79, 124, 255, 0.55);
-    box-shadow: 0 12px 26px rgba(79, 124, 255, 0.16);
+    border-color: #dcdcd8;
+    box-shadow: 0 2px 6px rgba(24, 24, 27, 0.06), 0 14px 30px -14px rgba(24, 24, 27, 0.14);
+    transform: translateY(-2px);
 }
 
 html[data-theme="light"] .section-card:hover::after {
-    opacity: 0.9;
-    transform: translateY(0);
+    opacity: 1;
+    transform: translateX(0);
+    color: var(--accent);
 }
 
 html[data-theme="light"] .section-card h3 {
     color: var(--primary);
+    font-weight: 600;
+}
+
+html[data-theme="light"] .section-card-icon {
+    border: 1px solid var(--border);
+    background: #fafaf9;
+    color: var(--secondary);
+    border-radius: 9px;
+}
+
+html[data-theme="light"] .section-card:hover .section-card-icon {
+    border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
+    color: var(--accent);
+    background: var(--accent-soft);
+    transform: none;
+    box-shadow: none;
+}
+
+/* macOS 三点：日间统一为单一 Indigo 色（不再红黄绿多彩）；夜间保留终端窗口原色不动 */
+html[data-theme="light"] .section-card-dots i,
+html[data-theme="light"] .section-card-dots i:nth-child(1),
+html[data-theme="light"] .section-card-dots i:nth-child(2),
+html[data-theme="light"] .section-card-dots i:nth-child(3) {
+    background: color-mix(in srgb, var(--accent) 32%, #d4d4d0);
+    opacity: 1;
+}
+html[data-theme="light"] .section-card:hover .section-card-dots i {
+    background: var(--accent);
+}
+
+html[data-theme="light"] .section-card-path {
+    color: var(--tertiary);
+    font-family: "JetBrains Mono", monospace;
+    opacity: 1;
 }
 
 html[data-theme="light"] .section-card-count {
-    font-family: "JetBrains Mono", Consolas, monospace;
-    font-size: 0.75em;
+    font-family: "Inter", sans-serif;
+    font-size: .8em;
+    color: var(--secondary);
 }
 
-/* ---------- 打字机气泡 ---------- */
+/* ---------- 打字机气泡：极淡，等宽，编辑感 ---------- */
 html[data-theme="light"] #matrix-typed {
-    background: linear-gradient(135deg, #f0f6ff, #f9f2ff);
-    border: 1.5px dashed rgba(139, 92, 246, 0.45);
-    border-radius: 16px;
-    color: var(--primary);
-    font-family: "JetBrains Mono", "Noto Sans SC", Consolas, monospace;
-    box-shadow: 0 4px 14px rgba(139, 92, 246, 0.10);
+    background: #f7f6f3;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--content);
+    font-family: "JetBrains Mono", "Noto Sans SC", monospace;
+    font-size: .96em;
+    box-shadow: none;
 }
 
 html[data-theme="light"] .typed-cursor {
-    color: var(--accent-3);
+    color: var(--pink);
 }
 
-/* ---------- 链接 ---------- */
+/* ---------- 正文标题：中性墨色，h2 前一点粉做俏皮 ---------- */
+html[data-theme="light"] .post-single .post-content h2 {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+html[data-theme="light"] .post-single .post-content h2::before {
+    content: "✦ ";
+    color: var(--pink);
+    font-size: .75em;
+    vertical-align: .18em;
+    margin-right: .1em;
+}
+
+html[data-theme="light"] .post-single .post-content h3 {
+    color: var(--primary);
+}
+
+/* ---------- 链接：沉稳 Indigo，下划线克制 ---------- */
 html[data-theme="light"] .post-content a {
-    color: var(--accent);
+    color: var(--accent-ink);
     text-decoration: none;
-    border-bottom: 1px dashed rgba(79, 124, 255, 0.45);
-    transition: all 0.2s ease;
+    border-bottom: 1px solid color-mix(in srgb, var(--accent-ink) 30%, transparent);
+    transition: border-color .18s ease, color .18s ease;
 }
 
 html[data-theme="light"] .post-content a:hover {
-    color: var(--accent-2);
-    border-bottom-style: solid;
-    border-bottom-color: var(--accent-2);
+    color: var(--accent);
+    border-bottom-color: var(--accent);
 }
 
-/* ---------- 代码：保留深蓝夜空代码块（科幻感），行内代码用淡紫签 ---------- */
+/* ---------- 正文强调 ---------- */
+html[data-theme="light"] .post-single .post-content strong {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+/* ---------- 引用块：Notion 式暖灰，左侧细线 ---------- */
+html[data-theme="light"] .post-single .post-content blockquote {
+    background: var(--quote-bg);
+    border-left: 2px solid var(--tertiary);
+    color: var(--secondary);
+    border-radius: 0 8px 8px 0;
+    font-style: normal;
+}
+
+/* ---------- 代码块：干净深色（与日间不冲突，Vercel 式） ---------- */
 html[data-theme="light"] .chroma,
 html[data-theme="light"] pre {
-    border: 1px solid #1f2b44 !important;
-    border-radius: 12px;
-    box-shadow: 0 4px 16px rgba(16, 24, 40, 0.18);
+    border: 1px solid #22252c !important;
+    border-radius: 10px;
+    box-shadow: 0 1px 2px rgba(24, 24, 27, 0.06);
 }
 
 html[data-theme="light"] .md-content pre,
 html[data-theme="light"] .post-content pre,
 html[data-theme="light"] .highlight pre,
 html[data-theme="light"] pre {
-    color: #d7e2f7 !important;
-    background-color: #101828 !important;
+    color: #d7dbe6 !important;
+    background-color: #16181d !important;
 }
 
 html[data-theme="light"] .copy-code {
-    color: #9db4e8 !important;
-    background: #1c2942 !important;
-    border: 1px solid #2b3c5e !important;
-    border-radius: 8px !important;
-    font-family: "JetBrains Mono", Consolas, monospace !important;
-    font-size: 0.75em !important;
+    color: #9aa3b2 !important;
+    background: #1e222a !important;
+    border: 1px solid #2c313b !important;
+    border-radius: 6px !important;
+    font-family: "JetBrains Mono", monospace !important;
+    font-size: .72em !important;
 }
 
 html[data-theme="light"] .copy-code:hover {
-    border-color: var(--accent) !important;
-    color: #dbeafe !important;
+    border-color: #3a4150 !important;
+    color: #cfd6e4 !important;
 }
 
+/* 行内代码：暖灰药丸，Indigo 字 */
 html[data-theme="light"] .post-content code:not(pre code) {
-    background: #eef2ff;
-    color: #4f46e5;
-    border: 1px solid #dbe3fb;
-    padding: 1px 7px;
-    border-radius: 6px;
+    background: #f4f4f2;
+    color: var(--accent-ink);
+    border: 1px solid #ececea;
+    padding: .12em .45em;
+    border-radius: 5px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: .88em;
 }
 
-/* ---------- 引用块：便签风 ---------- */
-html[data-theme="light"] .post-single .post-content blockquote {
-    background: var(--quote-bg);
-    border-left-color: var(--accent-2);
-    color: var(--secondary);
-    border-radius: 0 12px 12px 0;
+/* ---------- 表格：极简，去竖线，只留横向细线（社区最佳实践） ---------- */
+html[data-theme="light"] .post-content table,
+html[data-theme="light"] .entry-content table {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
 }
 
-/* ---------- 表格 ---------- */
 html[data-theme="light"] .post-content th,
 html[data-theme="light"] .entry-content th {
-    background: #eef4ff;
+    background: #fafaf9;
     color: var(--primary);
-    border: 1px solid var(--border);
+    border: none;
+    border-bottom: 1px solid var(--border);
+    font-weight: 600;
 }
 
 html[data-theme="light"] .post-content td,
 html[data-theme="light"] .entry-content td {
     background: #ffffff;
-    border: 1px solid var(--border);
+    border: none;
+    border-bottom: 1px solid var(--border);
+    color: var(--content);
+}
+
+html[data-theme="light"] .post-content tr:last-child td,
+html[data-theme="light"] .entry-content tr:last-child td {
+    border-bottom: none;
 }
 
 html[data-theme="light"] .post-content tr:nth-child(even) td,
 html[data-theme="light"] .entry-content tr:nth-child(even) td {
-    background: #f9fbff;
+    background: #fcfcfb;
 }
 
 html[data-theme="light"] .post-content tr:hover td,
 html[data-theme="light"] .entry-content tr:hover td {
-    background: #f0f6ff;
+    background: #f7f6f3;
 }
 
-/* ---------- 标签：胶囊 ---------- */
+/* ---------- 标签：中性药丸，悬停点亮 Indigo ---------- */
 html[data-theme="light"] .post-tags a,
 html[data-theme="light"] .terms-tags a,
 html[data-theme="light"] .tag-entry a {
     background: var(--tag-bg) !important;
-    color: var(--accent) !important;
+    color: var(--secondary) !important;
     border: 1px solid var(--border) !important;
     border-radius: 999px !important;
+    font-weight: 500;
 }
 
 html[data-theme="light"] .post-tags a:hover,
 html[data-theme="light"] .terms-tags a:hover {
-    background: var(--accent) !important;
-    color: #ffffff !important;
-    border-color: var(--accent) !important;
-    box-shadow: 0 4px 12px rgba(79, 124, 255, 0.3) !important;
+    background: var(--accent-soft) !important;
+    color: var(--accent) !important;
+    border-color: color-mix(in srgb, var(--accent) 30%, var(--border)) !important;
+    box-shadow: none !important;
 }
 
-/* ---------- 分页 ---------- */
+/* ---------- 分页：细边框药丸 ---------- */
 html[data-theme="light"] .pagination a {
     background: #ffffff;
     border: 1px solid var(--border);
-    border-radius: 999px;
-    color: var(--accent);
-    box-shadow: 0 2px 8px rgba(30, 42, 74, 0.05);
+    border-radius: 10px;
+    color: var(--secondary);
+    box-shadow: none;
 }
 
 html[data-theme="light"] .pagination a:hover {
-    border-color: var(--accent);
-    box-shadow: 0 4px 14px rgba(79, 124, 255, 0.2);
+    border-color: #dcdcd8;
+    color: var(--primary);
+    box-shadow: 0 1px 3px rgba(24, 24, 27, 0.06);
 }
 
-/* ---------- 首页 home-info ---------- */
+/* ---------- 首页 home-info：留白，虚线分隔 ---------- */
 html[data-theme="light"] .home-info {
-    border-bottom: 1px dashed var(--border);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 20px;
 }
 
 html[data-theme="light"] .home-info .entry-content {
     color: var(--secondary);
+    line-height: 1.75;
 }
 
-/* ---------- 归档 / 标签页 ---------- */
+/* ---------- 归档 / 标签页标题 ---------- */
 html[data-theme="light"] .archives h2,
 html[data-theme="light"] .term h2 {
     color: var(--primary);
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 600;
 }
 
-html[data-theme="light"] .archives .archive-year,
-html[data-theme="light"] .archive-post a {
-    color: var(--content);
+html[data-theme="light"] .archive-year {
+    color: var(--primary);
+    font-weight: 600;
 }
 
-/* ---------- 选中文本：樱粉色 ---------- */
+/* ---------- 选中文本：极淡 Indigo ---------- */
 html[data-theme="light"] ::selection {
-    background: rgba(244, 114, 182, 0.28);
-    color: #16213e;
+    background: color-mix(in srgb, var(--accent) 18%, transparent);
+    color: var(--primary);
 }
 
-/* ---------- 页脚 ---------- */
+/* ---------- 页脚：极淡，留白 ---------- */
 html[data-theme="light"] .footer {
-    border-top: 1px dashed var(--border);
+    border-top: 1px solid var(--border);
+    color: var(--tertiary);
 }
 
 html[data-theme="light"] .footer a {
@@ -404,38 +471,84 @@ html[data-theme="light"] .footer a {
 }
 
 html[data-theme="light"] .footer a:hover {
-    color: var(--accent);
+    color: var(--primary);
 }
 
-/* ---------- 搜索页 ---------- */
+/* ---------- 搜索页：干净输入框 ---------- */
 html[data-theme="light"] .pagefind-ui__search-input {
     background: #ffffff !important;
-    border: 1.5px solid var(--border) !important;
-    border-radius: 12px !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 10px !important;
     color: var(--content) !important;
-    font-family: "Quicksand", "Noto Sans SC", sans-serif !important;
+    font-family: "Inter", "PingFang SC", sans-serif !important;
 }
 
 html[data-theme="light"] .pagefind-ui__search-input:focus {
     border-color: var(--accent) !important;
-    box-shadow: 0 0 0 4px var(--accent-soft) !important;
+    box-shadow: 0 0 0 3px var(--accent-soft) !important;
     outline: none !important;
 }
 
 html[data-theme="light"] .pagefind-ui__result-title a {
+    color: var(--primary) !important;
+    font-weight: 600;
+}
+
+html[data-theme="light"] .pagefind-ui__result-title a:hover {
     color: var(--accent) !important;
 }
 
 html[data-theme="light"] .pagefind-ui__result-excerpt mark {
-    background: rgba(244, 114, 182, 0.25) !important;
-    color: #16213e !important;
+    background: color-mix(in srgb, var(--pink) 22%, transparent) !important;
+    color: var(--primary) !important;
     border-radius: 3px;
+    padding: 0 2px;
 }
 
-/* ---------- TOC ---------- */
+/* ---------- TOC：极淡 ---------- */
 html[data-theme="light"] details.toc,
 html[data-theme="light"] .toc {
-    background: #f6f9ff;
+    background: #fafaf9;
     border: 1px solid var(--border);
-    border-radius: 12px;
+    border-radius: 10px;
+}
+
+/* ---------- 主题切换按钮：柔和 ---------- */
+html[data-theme="light"] .theme-toggle {
+    color: var(--secondary);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: #fafaf9;
+    transition: all .18s ease;
+}
+
+html[data-theme="light"] .theme-toggle:hover {
+    color: var(--accent);
+    border-color: color-mix(in srgb, var(--accent) 30%, var(--border));
+    background: var(--accent-soft);
+}
+
+/* ---------- 首页板块标记：内联线性图标，统一单色（跟随正文色） ---------- */
+.sec-mark {
+    display: inline-flex;
+    vertical-align: -0.28em;
+    margin-right: 0.15em;
+    color: var(--secondary);
+}
+.sec-mark svg {
+    width: 1.15em;
+    height: 1.15em;
+}
+html[data-theme="light"] .home-info .sec-mark {
+    color: var(--accent);
+}
+
+/* ---------- 移动端微调 ---------- */
+@media (max-width: 600px) {
+    html[data-theme="light"] .post-entry {
+        padding: 14px 12px;
+    }
+    html[data-theme="light"] .first-entry .entry-header h1 {
+        font-size: 1.8em;
+    }
 }
